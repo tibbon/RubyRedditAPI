@@ -18,8 +18,9 @@ module Reddit
           end
         else
           data     = json["data"]
+          results << {:after => data["after"]}
           Reddit::Base.instance_variable_set("@modhash", data["modhash"]) # Needed for api calls
-
+          
           children = data["children"] || [{"data" => data, "kind" => json["kind"] }]
           children.each do |message|
             kind     = message["kind"]

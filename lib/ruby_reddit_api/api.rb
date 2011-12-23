@@ -24,6 +24,11 @@ module Reddit
       if options[:limit]
         options.merge!({:query => {:limit => options[:limit]}})
       end
+      pp options
+      if options[:after] #I should put this line as a patch
+        options.merge!({:query => {:limit => options[:limit], :after => options[:after]}})
+      end
+      pp options
       read("/r/#{subreddit}.json", options )
     end
 
